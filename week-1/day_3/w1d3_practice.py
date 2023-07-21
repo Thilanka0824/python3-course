@@ -1,4 +1,10 @@
 # ITP Week 1 Day 3 (In-Class) Practice
+more_fruits = ["raspberry", "coconut", "pineapple",
+               2342, 4554, 324, 4567, 23, 345, 234,  4534, 2342]
+
+more_fruits[2:5] = ["grape", "durian"] 
+
+print((more_fruits))
 
 # Take an user's input and assign it to a variable named "student_grade_string"
 
