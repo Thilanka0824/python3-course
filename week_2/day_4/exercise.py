@@ -1,5 +1,5 @@
 # ITP Week 2 Day 4 Exercise
-
+import random
 # 1. Dictionary Loop
 
 inventory = {
@@ -84,6 +84,11 @@ update_role(instructor_list[3])
 def is_instructor(list):
   
     for dictionary in list: #for the list of objs
+        if "id" in dictionary: 
+            new_id = str(random.randint(10000, 99999))
+            dictionary["id"] = new_id
+            # print(dictionary)
+
         if dictionary.get("role") == "INSTRUCTOR":
             print("VALID", dictionary)
         else:
@@ -101,7 +106,7 @@ is_instructor(instructor_list)
     # e. don't forget to run it!
     
 # 3. Explicit Functions
-user_info = [46453, "Devin", "Smith"]
+user_info = [46453, "Devin", "Smith", 78659, "Harley", "Quinn",]
     # Each element by index of user_info follows the format of: id, first_name, last_name
 
     # Create a function with a parameter user_list
@@ -109,3 +114,29 @@ user_info = [46453, "Devin", "Smith"]
     #   - id: user_list[0]
     #   - first_name: user_list[1]
     #   - last_name: user_list[2]
+
+# def dictionary_creator(user_info_list):
+#     for i in user_info_list:
+#         return {
+#             "id": user_info_list[0],
+#             "first_name": user_info_list[1],
+#             "last_name": user_info_list[2],
+#         }
+
+def dictionary_creator(user_info_list):
+    users = []
+    if len(user_info_list) % 3 == 0:
+        for i in range(0, len(user_info_list), 3):
+            user_dict = {
+                "id": user_info_list[i],
+                "first_name": user_info_list[i + 1],
+                "last_name": user_info_list[i + 2],
+            }
+            users.append(user_dict)
+    else:
+        return print("list must be divisible by 3")
+    return users
+
+
+
+print(dictionary_creator(user_info))
