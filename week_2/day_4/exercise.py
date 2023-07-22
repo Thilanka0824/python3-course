@@ -19,7 +19,7 @@ for item in inventory:
 
     # NOTE: recall that item represents the key of the key:value pair
 
-print(inventory)
+# print(inventory)
 # 2. Implicit Functions 
 # (When we work with global variables/objects and don't return anything, 
 # these functions are implicit return functions!)
@@ -47,11 +47,18 @@ user_3 = {
     "id": "74324"
 }
 
+user_4 = {
+    "firstName": "Thilanka",
+    "lastName": "Rodrigo",
+    "role": "Student", 
+    "id": "08244"
+}
+
 def update_role(user):
     for key, value in user.items(): #
         if key == "role":
             key_name = key.upper()
-            print(key_name)
+            # print(key_name)
             user[key] = user[key].upper() 
             
             
@@ -64,22 +71,25 @@ def update_role(user):
 
     # b. Dictionaries - Run the functions (3 times for each user!)
 
-instructor_list = [user_1, user_2, user_3]
+instructor_list = [user_1, user_2, user_3, user_4]
 update_role(instructor_list[0])
 update_role(instructor_list[1])
 update_role(instructor_list[2])
+update_role(instructor_list[3])
 # print(instructor_list)
 
 
     # c. List - create a function that takes in the list and 
 
 def is_instructor(list):
+  
     for dictionary in list: #for the list of objs
-        for key, value in dictionary.items(): #for the keys and values in the the dictionary 
-            if key == "role" and value == "INSTRUCTOR":
-                print("VALID")
-            else:
-                print("INVALID")
+        if dictionary.get("role") == "INSTRUCTOR":
+            print("VALID", dictionary)
+        else:
+            print("INVALID", dictionary)
+    
+    
             
     # checks if the each user's role is equal to "INSTRUCTOR". 
     # if it is the same, print VALID else print INVALID (try to use a loop here!)
