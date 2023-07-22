@@ -68,13 +68,22 @@ instructor_list = [user_1, user_2, user_3]
 update_role(instructor_list[0])
 update_role(instructor_list[1])
 update_role(instructor_list[2])
-print(instructor_list)
+# print(instructor_list)
 
 
     # c. List - create a function that takes in the list and 
+
+def is_instructor(list):
+    for dictionary in list: #for the list of objs
+        for key, value in dictionary.items(): #for the keys and values in the the dictionary 
+            if key == "role" and value == "INSTRUCTOR":
+                print("VALID")
+            else:
+                print("INVALID")
+            
     # checks if the each user's role is equal to "INSTRUCTOR". 
     # if it is the same, print VALID else print INVALID (try to use a loop here!)
-
+is_instructor(instructor_list)
 # role_check(instructor_list)
 
     # d. import the random module and update the function to re-assign the id of each user
