@@ -3,8 +3,8 @@ mock_data = {
     "count": 826,
     "pages": 42,
     "next": "https://test-rick_and_morty.com/character/?page=2",
-    "prev": null
-  },
+    "prev": None
+  }, 
   "results": [
     {
       "id": 1,
