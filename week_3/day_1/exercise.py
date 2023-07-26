@@ -11,11 +11,11 @@ users_list = ["Alex", "Bob", "Charlie", "Dexter", "Edgar", "Frank", "Gary"]
 # example output
 
 # [{"user_id": 0, "name": "Alex"}, etc, etc]
-# for str in users_list:
-#     print({"user_id": users_list.index(str), "name": str})
+for str in users_list:
+    print({"user_id": users_list.index(str), "name": str})
 # print(str)
 # print the index of the list
-# print(users_list.index(str))
+print(users_list.index(str))
 # "name": users_list
 
 
