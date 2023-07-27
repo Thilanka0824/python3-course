@@ -9,24 +9,84 @@ character_url = "https://rickandmortyapi.com/api/character"
 # EASY MODE
 
 # import the appropriate modules (you have 3)
+import json, requests
+from openpyxl import Workbook
 
 # set up a workbook and worksheet titled "Rick and Morty Characters"
+wb = Workbook()
+ws = wb.active
+ws.title = "Rick and Morty Characters"
+
 
 # assign a variable 'data' with the returned GET request
+response = requests.get(character_url)
+json_data = response.text
+data = json.loads(json_data)
+# print(data)
+
 
 # create the appropriate headers in openpyxl for all of the keys for a single character
+headers = []
+for key in data['results'][0].keys():
+  headers.append(key)
+ws.append(headers)
+
+
+# wb.save("rick_and_morty.xlsx")
+
+# print(headers)
+
 
 # loop through all of the 'results' of the data to populate the rows and columns for each character
+for row, character in enumerate(data['results'], 2):
+  for column, char_value in enumerate(character.values(), 1):
+    ws.cell(row=row, column=column, value=str(char_value))
 
-# NOTE: due to the headers, the rows need to be offset by one!
+# due to the headers, the rows need to be offset by one!
 
+wb.save("rick_and_morty.xlsx")
 # MEDIUM MODE
 
 # create 2 new worksheets for "Rick and Morty Locations" and "Rick and Morty Episodes"
+ws1 = wb.create_sheet("Rick and Morty Locations")
+ws2 = wb.create_sheet("Rick and Morty Episodes")
 
-# create 2 new variables for character_url and location_url (retrieve it from the docs!)
+# create 2 new variables for episode_url and location_url (retrieve it from the docs!)
+episode_url = "https://rickandmortyapi.com/api/episode"
+location_url = "https://rickandmortyapi.com/api/location"
 
 # populate the new worksheets appropriately with all of the data!
+
+#episodes
+epi_response = requests.get(episode_url)
+epi_json_data = epi_response.text
+epi_data = json.loads(epi_json_data)
+
+epi_headers = []
+for key in epi_data['results'][0].keys():
+  epi_headers.append(key)
+ws2.append(epi_headers)
+
+for row, episode in enumerate(epi_data["results"], 2):
+  for column, episode_value in enumerate(episode.values(), 1):
+    ws2.cell(row=row, column=column, value=str(episode_value))
+wb.save("rick_and_morty.xlsx")
+
+#location
+loc_response = requests.get(location_url)
+loc_json_data = loc_response.text
+loc_data = json.loads(loc_json_data)
+
+loc_headers = []
+for key in loc_data['results'][0].keys():
+  loc_headers.append(key)
+ws1.append(loc_headers)
+
+for row, location in enumerate(loc_data["results"], 2):
+  for column, location_value in enumerate(location.values(), 1):
+    ws1.cell(row=row, column=column, value=str(location_value))
+wb.save("rick_and_morty.xlsx")
+
 
 # NOTE: don't forget your headers!
 
@@ -62,14 +122,14 @@ character_url = "https://rickandmortyapi.com/api/character"
 # NOTE: need to make use of if statements to see if url exists or not
 # (contact instructors for office hours if stuck!)
 
-for row, episode in enumerate(data, 2):
-  for column, episode in enumerate(episode.items(), 1):
-      if episode[0] == "characters":
-          # new list to collect the names
-          # for loop for each character  
-          # then do another request
-          # deserialize for just the name       
-          # append name to new list
-          ws.cell(row=row, column=column, value=str(name_list))
-      else:
-        ws.cell(row=row, column=column, value=str(episode[1]))
+# for row, episode in enumerate(data, 2):
+#   for column, episode in enumerate(episode.items(), 1):
+#       if episode[0] == "characters":
+#           # new list to collect the names
+#           # for loop for each character  
+#           # then do another request
+#           # deserialize for just the name       
+#           # append name to new list
+#           ws.cell(row=row, column=column, value=str(name_list))
+#       else:
+#         ws.cell(row=row, column=column, value=str(episode[1]))

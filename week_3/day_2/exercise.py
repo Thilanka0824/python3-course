@@ -20,12 +20,13 @@ json_data = response.text
 # print(json_data)
 
 # print(json_data)
+posts = json.loads(json_data)
 
 # lets make it into a python dictionary by using the appropriate json method
 # rick_and_morty_json = json.loads(json_data)
 # rick_and_morty_json = json_data
 
 # print the newly created python object
-print(json_data)
+# print(json_data)
 
-# print(posts)
+print(posts)

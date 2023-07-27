@@ -4,6 +4,7 @@ import requests, json
 
 # import in the two modules for making API calls and parsing the data
 
+
 # Using our API call from the exercise yesterday (this is provided for you):
 
 # UNCOMMENT BELOW AFTER YOUR IMPORTS
@@ -13,10 +14,13 @@ json_data = response.text
 data = json.loads(json_data)
 
 # print it out to see how the data looks initially:
+# print(data)
 
 # Convert the very hard to read data back into JSON using json.dumps (store into a serialized_json variable):
 serialized_json = json.dumps(data)
 # print the serialized_json
+
+# print(serialized_json)
 
 # This doesn't look too different than our original print at a glance
 
@@ -39,6 +43,8 @@ serialized_json = json.dumps(data)
 
 # uncomment below to see the changes!
 # print(serialized_json)
+indented = json.dumps(data, indent=4, sort_keys=True, separators=(": ", "=> "))
+print(indented)
 
 # Again, this one is just for you the programmer to be able to easily
 # sort through the data that you have gotten from the api alphabetically.
