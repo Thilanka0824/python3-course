@@ -56,6 +56,13 @@ episode_url = "https://rickandmortyapi.com/api/episode"
 location_url = "https://rickandmortyapi.com/api/location"
 
 # populate the new worksheets appropriately with all of the data!
+response2 = requests.get(location_url)
+data2 = response2.json()
+locations = data2['results']
+
+response3 = requests.get(episode_url)
+data3 = response3.json()
+episodes = data3['results']
 
 #episodes
 epi_response = requests.get(episode_url)
@@ -88,6 +95,22 @@ for row, location in enumerate(loc_data["results"], 2):
 wb.save("rick_and_morty.xlsx")
 
 
+# use the "next" URL to continuously pull data until all data has been retrieved
+# while url is not None:
+#   response = requests.get(url)
+#   json_data = response.text
+#   data = json.loads(json_data)
+  
+#   # add the new data to the worksheet
+#   for row, character in enumerate(data['results'], len(ws['A'])+1):
+#     for column, char_value in enumerate(character.values(), 1):
+#       ws.cell(row=row, column=column, value=str(char_value))
+  
+#   # update the "next" URL
+#   url = data['info'].get('next')
+
+
+
 # NOTE: don't forget your headers!
 
 # HARD MODE
@@ -95,7 +118,41 @@ wb.save("rick_and_morty.xlsx")
 # Can you decipher the INFO key of the data to use "next" url to continuously pull data?
 # Currently, we are only pulling 20 items per api pull!
 # WE WANT EVERYTHING. (contact instructors for office hours if stuck!)
+ws2 = wb.create_sheet("Rick and Morty Locations")
+ws3 = wb.create_sheet("Rick and Morty Episodes")
 
+column = 1
+for key in locations[0].keys():
+    ws2.cell(row=1, column=column, value=key)
+    column += 1
+
+column = 1
+for key in episodes[0].keys():
+    ws3.cell(row=1, column=column, value=key)
+    column += 1
+
+while data2['info']['next']:
+    url = data2['info']['next']
+    response2 = requests.get(url)
+    data2 = response2.json()
+    locations += data2['results']
+
+for row, location in enumerate(locations, 2):
+    for column, location in enumerate(location.values(), 1):
+        ws2.cell(row=row, column=column, value=str(location))
+
+
+while data3['info']['next']:
+    url = data3['info']['next']
+    response3 = requests.get(url)
+    data3 = response3.json()
+    episodes += data3['results']
+
+for row, episode in enumerate(episodes, 2):
+    for column, episode in enumerate(episode.values(), 1):
+        ws3.cell(row=row, column=column, value=str(episode))
+
+wb.save("rick_and_morty_answers.xlsx")
 # NIGHTMARE
 
 # The inner information for characters, locations, and episodes, references one another through urls
@@ -133,3 +190,6 @@ wb.save("rick_and_morty.xlsx")
 #           ws.cell(row=row, column=column, value=str(name_list))
 #       else:
 #         ws.cell(row=row, column=column, value=str(episode[1]))
+
+
+  # set the URL to the "next" URL in the response, if it exists
